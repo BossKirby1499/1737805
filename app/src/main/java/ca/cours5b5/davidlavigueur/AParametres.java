@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import ca.cours5b5.davidlavigueur.activites.Activite;
+import ca.cours5b5.davidlavigueur.global.GLog;
 
 public class AParametres extends Activite {
 
@@ -12,6 +13,7 @@ public class AParametres extends Activite {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_parametres);
+        Hello();
     }
     @Override
     protected int getContentViewId(){
@@ -19,7 +21,13 @@ public class AParametres extends Activite {
     }
     @Override
     protected void setContentViewId(int contentViewId){
-       
+
+    }
+    protected void Hello(){
+
+        GLog.appel(this);
+        GLog.valeurs("Bonjour");
+
     }
 
 }
