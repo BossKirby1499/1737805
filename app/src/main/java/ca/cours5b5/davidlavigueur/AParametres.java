@@ -4,11 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class AParametres extends AppCompatActivity {
+import ca.cours5b5.davidlavigueur.activites.Activite;
+
+public class AParametres extends Activite {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_parametres);
     }
+    @Override
+    protected int getContentViewId(){
+        return R.layout.page_parametres;
+    }
+    @Override
+    protected void setContentViewId(int contentViewId){
+       
+    }
+
 }
