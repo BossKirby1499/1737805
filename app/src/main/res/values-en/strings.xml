@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DavidLavigueur</string>
-    <string name="msg_valeur">Hello!</string>
+    <string name="msg_valeur">Hello!</string><string name="bienvenue">Preferred board size for a new game</string>
+    <string name="continuer">   Resume previous game</string>
+    <string name="taille_p">Small</string>
+    <string name="taille_m">Medium</string>
+    <string name="taille_g">Large</string>
 </resources>

@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">DavidLavigueur</string>
     <string name ="msg_valeur">Bonjour!</string>
+    <string name="bienvenue">Taille préféré pour une nouvelle partie!</string>
+    <string name="continuer">   Continuer partie précédente</string>
+    <string name="taille_p">Petit</string>
+    <string name="taille_m">Moyen</string>
+    <string name="taille_g">Grande</string>
 </resources>
