@@ -6,4 +6,8 @@
     <string name="taille_p">Small</string>
     <string name="taille_m">Medium</string>
     <string name="taille_g">Large</string>
+    <string name="conn">login</string>
+    <string name="joue">play</string>
+    <string name="joueLigne">play on-line</string>
+    <string name="settings">settings</string>
 </resources>
