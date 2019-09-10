@@ -1,12 +1,8 @@
-package ca.cours5b5.davidlavigueur;
-
-import androidx.appcompat.app.AppCompatActivity;
+package ca.cours5b5.davidlavigueur.activites;
 
 import android.os.Bundle;
 
-import java.util.Locale;
-
-import ca.cours5b5.davidlavigueur.activites.Activite;
+import ca.cours5b5.davidlavigueur.R;
 import ca.cours5b5.davidlavigueur.global.GLog;
 
 public class AParametres extends Activite {
@@ -18,30 +14,33 @@ public class AParametres extends Activite {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_parametres);
 
-        Bonjour();
-        Orientation();
+        AfficherBonjour();
+        AfficherOrientation();
 
     }
+
+
+
     @Override
-    protected int getContentViewId(){
+    protected int getLayoutId(){
+        GLog.appel(this);
         return R.layout.page_parametres;
     }
-    @Override
-    protected void setContentViewId(int contentViewId){
 
-    }
-    protected void Bonjour(){
+
+    protected void AfficherBonjour(){
 
         GLog.appel(this);
         message =  this.getResources().getString(R.string.msg_valeur);
         GLog.valeurs(message);
     }
-    protected void Orientation(){
+
+
+    protected void AfficherOrientation(){
 
         GLog.appel(this);
         orien =  this.getResources().getBoolean(R.bool.est_portrait);
         GLog.valeurs("Est-ce qu'on est en portrait?, " + orien);
     }
-
 
 }
