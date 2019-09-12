@@ -2,6 +2,8 @@ package ca.cours5b5.davidlavigueur.activites;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import ca.cours5b5.davidlavigueur.global.GLog;
 
 public abstract class Activite extends AppCompatActivity {
