@@ -6,6 +6,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
+import ca.cours5b5.davidlavigueur.global.GLog;
+
 public class VColonne extends LinearLayout {
     public VColonne(Context context) {
         super(context);
@@ -21,5 +23,10 @@ public class VColonne extends LinearLayout {
 
     public VColonne(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public VColonne(Context context, int hauteur, int i) {
+        super(context);
+        GLog.appel(this);
     }
 }

@@ -3,6 +3,7 @@ package ca.cours5b5.davidlavigueur.vues.pages;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import ca.cours5b5.davidlavigueur.R;
 import ca.cours5b5.davidlavigueur.global.GLog;
 import ca.cours5b5.davidlavigueur.vues.controles.VGrille;
 
@@ -23,8 +24,9 @@ public abstract class PPartie extends Page {
     @Override
     protected void recupererControles(){
         GLog.appel(this);
-        int a = (int) (Math.random() * (6 - 2));
-        int b = (int) (Math.random() * (6 - 2));
+        grille = this.findViewById(R.id.grille);
+        int a = (int) (Math.random() * (4));
+        int b = (int) (Math.random() * (4));
         grille.creerGrille(a,b);
     }
 }
