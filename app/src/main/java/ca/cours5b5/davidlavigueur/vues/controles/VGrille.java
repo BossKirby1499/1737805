@@ -1,0 +1,38 @@
+package ca.cours5b5.davidlavigueur.vues.controles;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.LinearLayout;
+
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+
+import ca.cours5b5.davidlavigueur.global.GLog;
+
+public class VGrille extends LinearLayout {
+
+    ArrayList<VColonne>  tabCol =  new ArrayList<VColonne>();
+
+    public VGrille(Context context) {
+        super(context);
+    }
+
+    public VGrille(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public VGrille(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public VGrille(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+    public void creerGrille(int hauteur, int largeur){
+        GLog.appel(this);
+
+
+
+    }
+}
