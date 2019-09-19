@@ -40,7 +40,7 @@ public class VGrille extends LinearLayout {
 
 
       for(int i= 0; i<= largeur; i++){
-            VColonne colTemp = new VColonne(getContext(),hauteur,i);
+            VColonne colTemp = new VColonne(this.getContext(),hauteur,i);
             tabCol.add(colTemp);
             this.addView(colTemp,layoutparams);
       }

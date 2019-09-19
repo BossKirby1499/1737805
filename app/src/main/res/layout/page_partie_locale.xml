@@ -7,28 +7,38 @@
 
     <ca.cours5b5.davidlavigueur.vues.controles.VGrille
         android:id="@+id/grille"
-        android:layout_width="match_parent"
-        android:layout_height="638dp" />
+        android:layout_width="357dp"
+        android:layout_height="522dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ca.cours5b5.davidlavigueur.vues.controles.VGrille>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="361dp"
+        android:layout_height="102dp"
+        app:layout_constraintEnd_toEndOf="@+id/grille"
+        app:layout_constraintStart_toStartOf="@+id/grille"
+        app:layout_constraintTop_toBottomOf="@+id/grille"
+        tools:layout_editor_absoluteY="183dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="63dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="37dp"
-            android:layout_marginEnd="144dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="37dp"
             android:text="Joueur01"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView2"
@@ -36,14 +46,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="37dp"
-            android:layout_marginEnd="87dp"
+            android:layout_marginEnd="70dp"
             android:layout_marginBottom="37dp"
             android:text="Joueur02"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ca.cours5b5.davidlavigueur.vues.pages.PPartieLocale>

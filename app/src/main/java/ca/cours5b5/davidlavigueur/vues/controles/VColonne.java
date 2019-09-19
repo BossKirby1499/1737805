@@ -2,13 +2,20 @@ package ca.cours5b5.davidlavigueur.vues.controles;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 import ca.cours5b5.davidlavigueur.global.GLog;
 
 public class VColonne extends LinearLayout {
+
+    VEntete entete;
+    ArrayList<VCase>  cases =  new ArrayList<VCase>();
+
     public VColonne(Context context) {
         super(context);
     }
@@ -25,8 +32,30 @@ public class VColonne extends LinearLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public VColonne(Context context, int hauteur, int i) {
+    public VColonne(Context context, int hauteur, int largeur) {
         super(context);
         GLog.appel(this);
+        remplirColonne(largeur,hauteur);
+    }
+
+
+    public void remplirColonne(int largeur, int hauteur){
+
+        LayoutParams layoutparams = new LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0,1f);
+        layoutparams.leftMargin = 10;
+        layoutparams.rightMargin = 20;
+        this.setOrientation(LinearLayout.VERTICAL);
+
+        entete = new VEntete(this.getContext(),largeur);
+
+        this.addView(entete,layoutparams);
+
+        for(int j= 0; j<= hauteur; j++){
+            VCase caseTemp = new VCase(this.getContext(),j,largeur);
+            cases.add(caseTemp);
+            this.addView(caseTemp,layoutparams);
+        }
+
     }
 }
