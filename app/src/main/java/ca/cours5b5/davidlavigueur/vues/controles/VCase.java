@@ -25,7 +25,7 @@ public class VCase extends AppCompatButton {
     public VCase(Context context,int hauteur, int largeur) {
         super(context);
         Button caseJeu = new Button(this.getContext());
-        caseJeu.setText(Integer.toString(largeur)+" , "+Integer.toString(hauteur));
+        this.setText(""+hauteur+" , "+largeur);
     }
 
 

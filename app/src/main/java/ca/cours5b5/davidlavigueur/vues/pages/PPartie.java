@@ -24,9 +24,10 @@ public abstract class PPartie extends Page {
     @Override
     protected void recupererControles(){
         GLog.appel(this);
+
         grille = this.findViewById(R.id.grille);
-        int a = (int) (Math.random() * (4));
-        int b = (int) (Math.random() * (4));
+        int a = (int) (Math.random() * (4)+2);
+        int b = (int) (Math.random() * (4)+2);
         grille.creerGrille(a,b);
     }
 }

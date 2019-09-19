@@ -24,7 +24,7 @@ public class VEntete extends AppCompatButton {
 
         Button entete = new Button(this.getContext());
 
-        entete.setText(Integer.toString(largeur));
+        this.setText(""+largeur);
 
     }
 

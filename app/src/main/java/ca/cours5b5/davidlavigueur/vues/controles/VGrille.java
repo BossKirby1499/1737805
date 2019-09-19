@@ -34,7 +34,7 @@ public class VGrille extends LinearLayout {
         GLog.appel(this);
 
         LayoutParams layoutparams = new LayoutParams(
-                0,ViewGroup.LayoutParams.MATCH_PARENT,2f);
+                0,ViewGroup.LayoutParams.MATCH_PARENT,3f);
         layoutparams.leftMargin = 10;
         layoutparams.rightMargin = 20;
 
