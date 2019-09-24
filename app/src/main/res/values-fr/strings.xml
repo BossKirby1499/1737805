@@ -11,4 +11,6 @@
     <string name="joue">jouer</string>
     <string name="joueLigne">jouer en ligne</string>
     <string name="settings">paramètres</string>
+    <string name="nom1">Patricia</string>
+    <string name="nom2">Samantha</string>
 </resources>

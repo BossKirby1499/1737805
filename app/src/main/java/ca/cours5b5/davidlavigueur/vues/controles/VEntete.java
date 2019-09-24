@@ -3,6 +3,7 @@ package ca.cours5b5.davidlavigueur.vues.controles;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatButton;
 

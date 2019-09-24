@@ -42,7 +42,7 @@ public class VColonne extends LinearLayout {
     public void remplirColonne(int largeur, int hauteur){
 
         LayoutParams layoutparams = new LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 0,1f);
+                ViewGroup.LayoutParams.MATCH_PARENT, 0,2f);
         layoutparams.leftMargin = 10;
         layoutparams.rightMargin = 20;
         this.setOrientation(LinearLayout.VERTICAL);
@@ -50,11 +50,15 @@ public class VColonne extends LinearLayout {
         entete = new VEntete(this.getContext(),largeur);
 
         this.addView(entete,layoutparams);
+        LayoutParams layoutparamsCase = new LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0,1f);
+        layoutparamsCase.leftMargin = 10;
+        layoutparamsCase.rightMargin = 20;
 
         for(int j= 0; j<= hauteur; j++){
             VCase caseTemp = new VCase(this.getContext(),j,largeur);
             cases.add(caseTemp);
-            this.addView(caseTemp,layoutparams);
+            this.addView(caseTemp,layoutparamsCase);
         }
 
     }
