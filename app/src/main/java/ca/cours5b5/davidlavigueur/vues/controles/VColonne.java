@@ -55,7 +55,7 @@ public class VColonne extends LinearLayout {
         layoutparamsCase.leftMargin = 10;
         layoutparamsCase.rightMargin = 20;
 
-        for(int j= 0; j<= hauteur; j++){
+        for(int j= hauteur; j>=0; j--){
             VCase caseTemp = new VCase(this.getContext(),j,largeur);
             cases.add(caseTemp);
             this.addView(caseTemp,layoutparamsCase);

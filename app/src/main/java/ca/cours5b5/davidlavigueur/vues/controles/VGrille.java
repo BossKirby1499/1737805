@@ -35,8 +35,8 @@ public class VGrille extends LinearLayout {
 
         LayoutParams layoutparams = new LayoutParams(
                 0,ViewGroup.LayoutParams.MATCH_PARENT,3f);
-        layoutparams.leftMargin = 10;
-        layoutparams.rightMargin = 20;
+     /*   layoutparams.leftMargin = 10;
+        layoutparams.rightMargin = 20;*/
 
 
       for(int i= 0; i<= largeur; i++){
