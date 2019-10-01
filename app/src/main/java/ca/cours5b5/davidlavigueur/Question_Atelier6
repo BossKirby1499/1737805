@@ -1,0 +1,39 @@
+    Dans quelles circonstances est-ce qu'une activité est crée?
+
+	- Lorsqu'on lance l'application
+        - Quand on appuie sur un bouton de changement de page
+	- Lorsque l'application plante et redémarre
+	- Lorsqu'on change la langue
+	- Quand on change de vue de landscape à portrait et vice-versa
+        - Quand on change le thème de l'application 
+
+    Dans quelles circonstances est-ce qu'une activité est interrompue (onPause)?
+
+	- Quand on sort de l'application sans la quitter
+	- Quand on créer une nouvelle activité
+	- Quand on change de vue de landscape à portrait et vice-versa
+
+    Dans quelles circonstances est-ce qu'une activité est réactivée (onResume)?
+	- Quand on ferme et ré-ouvre une application
+	- Quand on reviens sur une application qui était en pause
+	
+    Dans quelles circonstances est-ce qu'une activité est détruite?
+	- Quand l'application plante
+	- Quand on appuie sur un bouton de changement de page
+	- Lorsqu'on change la langue
+	- Quand on change de vue de landscape à portrait et vice-versa
+	- Quand on ferme complètement l'application
+	
+    Dans quelles circonstances est-ce que l'état est sauvegardé?
+	- À la création de l'application
+	- Quand on créer une nouvelle activité
+	- Quand l'application plante 
+
+    Dans quelles circonstances est-ce que l'état est restauré?
+	- Lorsqu'on relance l'application après qu'elle est planté
+	- Quand on relance l'application après l'avoir fermé 
+
+    Dans quelles circonstances est-ce que le choix de taille est conservé? perdu?
+
+	- Elle est conservé si celle-ci a été sauvegardé puis restauré 
+	- Elle est perdu si l'application n'a pas été sauvegardé

@@ -1,5 +1,6 @@
 package ca.cours5b5.davidlavigueur.activites;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,7 +24,7 @@ public class AAccueil extends ActiviteAvecControles {
     }
 
     @Override
-    protected void recupererControles(){
+    protected void recupererControles() {
         GLog.appel(this);
 
         deconnexion = this.findViewById(R.id.deconnexion);
@@ -33,7 +34,35 @@ public class AAccueil extends ActiviteAvecControles {
 
         GLog.valeurs(deconnexion, jouer, jouerEnLigne, parametres);
 
+        jouer.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                demarrerPartie();
+
+            }
+        });
+        parametres.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                pageParametres();
+
+            }
+        });
 
     }
 
+    public void demarrerPartie(){
+
+        Intent intention = new Intent(this, APartieLocale.class);
+        this.startActivity(intention);
+    }
+    public void pageParametres(){
+
+        Intent intention = new Intent(this, AParametres.class);
+        this.startActivity(intention);
+    }
 }

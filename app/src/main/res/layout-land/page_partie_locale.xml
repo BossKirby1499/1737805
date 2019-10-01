@@ -14,7 +14,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="32dp"
         android:rotation="90"
-        android:text="Andrea"
+        android:text="@string/nom1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,8 +28,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
-        android:text="Andrei"
         android:rotation="90"
+        android:text="@string/nom2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
