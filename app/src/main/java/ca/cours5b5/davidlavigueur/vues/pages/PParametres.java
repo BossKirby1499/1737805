@@ -7,9 +7,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import ca.cours5b5.davidlavigueur.R;
+import ca.cours5b5.davidlavigueur.donnees.DParametres;
+import ca.cours5b5.davidlavigueur.enumeration.ETailleGrille;
 import ca.cours5b5.davidlavigueur.global.GLog;
 
-public class PParametres extends Page {
+public class PParametres extends PageAvecDonnees<DParametres> {
 
     TextView texte;
     CheckBox check1;
@@ -27,6 +29,49 @@ public class PParametres extends Page {
 
     public PParametres(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    public void creerAffichage(DParametres donnees) {
+
+        if(donnees.getTailleGrille() == ETailleGrille.petite) {
+            check1.setChecked(true);
+        }else {
+            check1.setChecked(false);
+        }
+
+        if(donnees.getTailleGrille() == ETailleGrille.moyenne){
+            check2.setChecked(true);
+        }else {
+            check2.setChecked(false);
+        }
+        if(donnees.getTailleGrille() == ETailleGrille.grande){
+            check3.setChecked(true);
+        }else {
+            check2.setChecked(false);
+        }
+        switch1.setChecked(donnees.getABoolean());
+    }
+
+    @Override
+    public void rafraichirAffichage(DParametres donnees) {
+        if(donnees.getTailleGrille() == ETailleGrille.petite) {
+            check1.setChecked(true);
+        }else {
+            check1.setChecked(false);
+        }
+
+        if(donnees.getTailleGrille() == ETailleGrille.moyenne){
+            check2.setChecked(true);
+        }else {
+            check2.setChecked(false);
+        }
+        if(donnees.getTailleGrille() == ETailleGrille.grande){
+            check3.setChecked(true);
+        }else {
+            check2.setChecked(false);
+        }
+        switch1.setChecked(donnees.getABoolean());
     }
 
     @Override
