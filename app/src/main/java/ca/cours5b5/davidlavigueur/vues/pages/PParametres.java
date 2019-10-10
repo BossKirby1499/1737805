@@ -2,6 +2,7 @@ package ca.cours5b5.davidlavigueur.vues.pages;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -10,8 +11,10 @@ import ca.cours5b5.davidlavigueur.R;
 import ca.cours5b5.davidlavigueur.donnees.DParametres;
 import ca.cours5b5.davidlavigueur.enumeration.ETailleGrille;
 import ca.cours5b5.davidlavigueur.global.GLog;
+import ca.cours5b5.davidlavigueur.modeles.MParametres;
+import ca.cours5b5.davidlavigueur.modeles.Modele;
 
-public class PParametres extends PageAvecDonnees<DParametres> {
+public class PParametres extends PageAvecModeles<DParametres, MParametres> {
 
     TextView texte;
     CheckBox check1;
@@ -54,6 +57,38 @@ public class PParametres extends PageAvecDonnees<DParametres> {
     }
 
     @Override
+    public void installerCapteurs( final MParametres modele) {
+
+        switch1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                modele.changerSwitch(switch1.isChecked());
+            }
+        });
+        check1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                modele.changerCheckBox(ETailleGrille.petite);
+
+            }
+        });
+        check2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                modele.changerCheckBox(ETailleGrille.moyenne);
+            }
+        });
+        check3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                modele.changerCheckBox(ETailleGrille.grande);
+            }
+        });
+
+    }
+
+    @Override
     public void rafraichirAffichage(DParametres donnees) {
         if(donnees.getTailleGrille() == ETailleGrille.petite) {
             check1.setChecked(true);
@@ -69,7 +104,7 @@ public class PParametres extends PageAvecDonnees<DParametres> {
         if(donnees.getTailleGrille() == ETailleGrille.grande){
             check3.setChecked(true);
         }else {
-            check2.setChecked(false);
+            check3.setChecked(false);
         }
         switch1.setChecked(donnees.getABoolean());
     }
@@ -84,4 +119,6 @@ public class PParametres extends PageAvecDonnees<DParametres> {
         switch1 = this.findViewById(R.id.switch2);
         GLog.valeurs(texte,check1,check2, check3, switch1);
     }
+
+
 }

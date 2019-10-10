@@ -1,11 +1,12 @@
 package ca.cours5b5.davidlavigueur.donnees;
 
 import java.nio.MappedByteBuffer;
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntrepotDeDonnees {
 
-    static Map< Class<? extends Donnees>, Donnees> classDonneesMap;
+    static Map< Class<? extends Donnees>, Donnees> classDonneesMap = new HashMap<>();
 
     public static <D extends Donnees>
         D obtenirDonnees(Class<D> classeDonnees){
@@ -25,7 +26,8 @@ public class EntrepotDeDonnees {
     }
     private static boolean siDonneesSontDansEntrepot(Class<? extends Donnees> classeDonnees){
 
-        return classDonneesMap.containsKey(classeDonnees);
+        Boolean bool = classDonneesMap.containsKey(classeDonnees);
+        return bool;
 
     }
     private static<D extends Donnees> D creerDonnees(Class<D> classeDonnees){

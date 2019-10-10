@@ -1,17 +1,14 @@
 package ca.cours5b5.davidlavigueur.activites;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import ca.cours5b5.davidlavigueur.donnees.Donnees;
 import ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees;
 import ca.cours5b5.davidlavigueur.modeles.Modele;
-import ca.cours5b5.davidlavigueur.vues.pages.Page;
-import ca.cours5b5.davidlavigueur.vues.pages.PageAvecDonnees;
+import ca.cours5b5.davidlavigueur.vues.pages.PageAvecModeles;
 
 public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
-        P extends PageAvecDonnees> extends Activite {
+        P extends PageAvecModeles> extends Activite {
 
     private D donnees;
     private P page;

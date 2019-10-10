@@ -1,9 +1,9 @@
 package ca.cours5b5.davidlavigueur.modeles;
 
 import ca.cours5b5.davidlavigueur.donnees.Donnees;
-import ca.cours5b5.davidlavigueur.vues.pages.PageAvecDonnees;
+import ca.cours5b5.davidlavigueur.vues.pages.PageAvecModeles;
 
-public abstract class Modele <D extends Donnees,P extends PageAvecModele> {
+public abstract class Modele <D extends Donnees,P extends PageAvecModeles> {
 
     protected D donnees;
     protected P page;
@@ -12,6 +12,7 @@ public abstract class Modele <D extends Donnees,P extends PageAvecModele> {
 
         this.donnees = donnees;
         this.page = page;
+        page.installerCapteurs(this);
 
     }
 
