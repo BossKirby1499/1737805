@@ -70,19 +70,30 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
             @Override
             public void onClick(View view) {
                 modele.changerCheckBox(ETailleGrille.petite);
-
+                if(check1.isChecked()) {
+                    check2.setChecked(false);
+                    check3.setChecked(false);
+                }
             }
         });
         check2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 modele.changerCheckBox(ETailleGrille.moyenne);
+                if(check2.isChecked()) {
+                    check1.setChecked(false);
+                    check3.setChecked(false);
+                }
             }
         });
         check3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 modele.changerCheckBox(ETailleGrille.grande);
+                if(check3.isChecked()) {
+                    check1.setChecked(false);
+                    check2.setChecked(false);
+                }
             }
         });
 
@@ -92,6 +103,7 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
     public void rafraichirAffichage(DParametres donnees) {
         if(donnees.getTailleGrille() == ETailleGrille.petite) {
             check1.setChecked(true);
+
         }else {
             check1.setChecked(false);
         }

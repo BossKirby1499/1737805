@@ -10,19 +10,24 @@ import ca.cours5b5.davidlavigueur.vues.pages.PageAvecModeles;
 public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
         P extends PageAvecModeles> extends Activite {
 
+
     private D donnees;
     private P page;
     private M modele;
+    private Bundle etat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        initialiserDonneesPageModele();
+        initialiserDonneesPageModele(savedInstanceState);
     }
 
-    private void initialiserDonneesPageModele() {
-        donnees = recupererDonnees();
+
+    private void initialiserDonneesPageModele(Bundle etat) {
+
+        donnees = recupererDonnees(etat);
+
         initialiserPageModele(donnees);
 
 
@@ -50,13 +55,22 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
     }
 
-    private D recupererDonnees() {
+    private D recupererDonnees(Bundle etat) {
 
         Class <D> classeDonnees = getClassDonnees();
-        donnees =  EntrepotDeDonnees.obtenirDonnees(classeDonnees);
+        donnees =  EntrepotDeDonnees.obtenirDonnees(classeDonnees, etat);
 
         return donnees;
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+
+        EntrepotDeDonnees.sauvegarderDonnees(donnees, outState);
+
+    }
+
 
     protected abstract int getIdPage();
     protected abstract Class<D> getClassDonnees();
