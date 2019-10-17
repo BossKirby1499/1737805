@@ -2,6 +2,7 @@ package ca.cours5b5.davidlavigueur.donnees;
 
 import android.os.Bundle;
 
+import java.io.File;
 import java.nio.MappedByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
@@ -100,5 +101,8 @@ public class EntrepotDeDonnees {
     GLog.valeurs("Données chargées : ", classeDonnees, donneesJson);
     return donnees;
 
+    }
+
+    public static <D extends Donnees> void sauvegarderSurDisque(D donnees, File repertoireDonnees) {
     }
 }

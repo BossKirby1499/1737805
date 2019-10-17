@@ -29,9 +29,9 @@ public class AParametres extends ActiviteAvecModeles<DParametres, MParametres, P
     }
 
     @Override
-    protected void creerModele(DParametres donnees, PParametres page) {
-            Modele modele =  new MParametres(donnees,page);
-
+    protected MParametres creerModele(DParametres donnees, PParametres page) {
+            MParametres modele =  new MParametres(donnees,page);
+            return modele;
 
     }
 }

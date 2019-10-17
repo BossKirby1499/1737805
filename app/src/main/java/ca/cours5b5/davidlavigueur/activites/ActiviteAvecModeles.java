@@ -2,6 +2,20 @@ package ca.cours5b5.davidlavigueur.activites;
 
 import android.os.Bundle;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 import ca.cours5b5.davidlavigueur.donnees.Donnees;
 import ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees;
 import ca.cours5b5.davidlavigueur.modeles.Modele;
@@ -36,7 +50,7 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
     private void initialiserPageModele(D donnees) {
         page = recupererPage();
         page.creerAffichage(donnees);
-        creerModele( donnees, page);
+        modele = creerModele( donnees, page);
 
     }
 
@@ -48,10 +62,21 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onPause() {
+        super.onPause();
         page.rafraichirAffichage(donnees);
+       /* Path chemin = Paths.get(repertoireDonnees().getAbsolutePath(),);
 
+        BufferedWriter buf;
+        try {
+            buf = Files.newBufferedWriter(chemin, Charset.defaultCharset(), StandardOpenOption.APPEND);
+            buf.write(donnees.toString());
+            buf.close();
+
+        }catch(Exception e) {
+            e.getMessage();
+        } Pour entrepot de données*/
+       EntrepotDeDonnees.sauvegarderSurDisque(donnees,repertoireDonnees());
 
     }
 
@@ -71,9 +96,14 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
     }
 
+    private File repertoireDonnees(){
+        File repertoireDonnees = this.getFilesDir();
+        return repertoireDonnees;
+    }
+
 
     protected abstract int getIdPage();
     protected abstract Class<D> getClassDonnees();
-    protected abstract void creerModele(D donnees, P page);
+    protected abstract M creerModele(D donnees, P page);
 
 }
