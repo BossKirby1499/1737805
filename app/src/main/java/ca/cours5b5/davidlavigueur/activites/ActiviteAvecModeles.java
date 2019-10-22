@@ -65,25 +65,23 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
     protected void onPause() {
         super.onPause();
         page.rafraichirAffichage(donnees);
-       /* Path chemin = Paths.get(repertoireDonnees().getAbsolutePath(),);
 
-        BufferedWriter buf;
         try {
-            buf = Files.newBufferedWriter(chemin, Charset.defaultCharset(), StandardOpenOption.APPEND);
-            buf.write(donnees.toString());
-            buf.close();
-
-        }catch(Exception e) {
-            e.getMessage();
-        } Pour entrepot de données*/
-       EntrepotDeDonnees.sauvegarderSurDisque(donnees,repertoireDonnees());
+            EntrepotDeDonnees.sauvegarderSurDisque(donnees,repertoireDonnees());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     private D recupererDonnees(Bundle etat) {
 
         Class <D> classeDonnees = getClassDonnees();
-        donnees =  EntrepotDeDonnees.obtenirDonnees(classeDonnees, etat);
+        try {
+            donnees =  EntrepotDeDonnees.obtenirDonnees(classeDonnees, etat,repertoireDonnees());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return donnees;
     }

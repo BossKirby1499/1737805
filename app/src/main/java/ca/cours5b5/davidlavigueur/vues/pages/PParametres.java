@@ -37,22 +37,20 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
     @Override
     public void creerAffichage(DParametres donnees) {
 
-        if(donnees.getTailleGrille() == ETailleGrille.petite) {
+        if(donnees.getTailleGrille() == ETailleGrille.petite){
             check1.setChecked(true);
-        }else {
+            check2.setChecked(false);
+            check3.setChecked(false);
+        }else if(donnees.getTailleGrille() == ETailleGrille.moyenne){
             check1.setChecked(false);
+            check2.setChecked(true);
+            check3.setChecked(false);
+        }else{
+            check1.setChecked(false);
+            check2.setChecked(false);
+            check3.setChecked(true);
         }
 
-        if(donnees.getTailleGrille() == ETailleGrille.moyenne){
-            check2.setChecked(true);
-        }else {
-            check2.setChecked(false);
-        }
-        if(donnees.getTailleGrille() == ETailleGrille.grande){
-            check3.setChecked(true);
-        }else {
-            check2.setChecked(false);
-        }
         switch1.setChecked(donnees.getABoolean());
     }
 
@@ -101,24 +99,19 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
 
     @Override
     public void rafraichirAffichage(DParametres donnees) {
-        if(donnees.getTailleGrille() == ETailleGrille.petite) {
+        if(donnees.getTailleGrille() == ETailleGrille.petite){
             check1.setChecked(true);
-
-        }else {
-            check1.setChecked(false);
-        }
-
-        if(donnees.getTailleGrille() == ETailleGrille.moyenne){
-            check2.setChecked(true);
-        }else {
             check2.setChecked(false);
-        }
-        if(donnees.getTailleGrille() == ETailleGrille.grande){
-            check3.setChecked(true);
-        }else {
             check3.setChecked(false);
+        }else if(donnees.getTailleGrille() == ETailleGrille.moyenne){
+            check1.setChecked(false);
+            check2.setChecked(true);
+            check3.setChecked(false);
+        }else{
+            check1.setChecked(false);
+            check2.setChecked(false);
+            check3.setChecked(true);
         }
-        switch1.setChecked(donnees.getABoolean());
     }
 
     @Override
