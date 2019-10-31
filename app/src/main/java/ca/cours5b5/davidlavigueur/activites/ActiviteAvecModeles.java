@@ -49,7 +49,11 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
     private void initialiserPageModele(D donnees) {
         page = recupererPage();
-        page.creerAffichage(donnees);
+
+            page.creerAffichage(donnees);
+
+
+
         modele = creerModele( donnees, page);
 
     }
@@ -66,22 +70,18 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
         super.onPause();
         page.rafraichirAffichage(donnees);
 
-        try {
-            EntrepotDeDonnees.sauvegarderSurDisque(donnees,repertoireDonnees());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        EntrepotDeDonnees.sauvegarderSurDisque(donnees,repertoireDonnees());
+
 
     }
 
     private D recupererDonnees(Bundle etat) {
 
         Class <D> classeDonnees = getClassDonnees();
-        try {
+
             donnees =  EntrepotDeDonnees.obtenirDonnees(classeDonnees, etat,repertoireDonnees());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         return donnees;
     }

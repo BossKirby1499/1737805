@@ -32,7 +32,8 @@ public class EntrepotDeDonnees {
     private static Gson gson = new GsonBuilder().create();
 
     public static <D extends Donnees>
-        D obtenirDonnees(Class<D> classeDonnees, Bundle etat,File repertoireDonnees) throws IOException {
+        D obtenirDonnees(Class<D> classeDonnees, Bundle etat,File repertoireDonnees)  {
+
         GLog.appel(EntrepotDeDonnees.class);
 
      if(etat != null && siDonneesSontDansEtat(classeDonnees,etat)) {
@@ -75,11 +76,13 @@ public class EntrepotDeDonnees {
             return donnees;
         }catch(IllegalAccessException | InstantiationException e){
 
+            throw  new RuntimeException(e);
+
         }
-            return null;
     }
-    private static<D extends Donnees> void entreposerDonnees(D donnees){
+    public static<D extends Donnees> void entreposerDonnees(D donnees){
         GLog.appel(EntrepotDeDonnees.class);
+        GLog.valeurs(donnees);
         classDonneesMap.put(donnees.getClass(),donnees);
     }
     public static <D extends Donnees> void sauvegarderDonnees(D donnees, Bundle etat){
@@ -124,14 +127,16 @@ public class EntrepotDeDonnees {
 
     }
 
-    public static <D extends Donnees> void sauvegarderSurDisque(D donnees, File repertoireDonnees) throws IOException {
+    public static <D extends Donnees> void sauvegarderSurDisque(D donnees, File repertoireDonnees)  {
         GLog.appel(EntrepotDeDonnees.class);
-
-        FileOutputStream output = new FileOutputStream(repertoireDonnees+"/"+nomFichierPourClasseDonnees(donnees.getClass()));
-        BufferedWriter buf = new BufferedWriter(new OutputStreamWriter(output));
-        buf.write(gson.toJson(donnees));
-        buf.close();
-
+        try {
+            FileOutputStream output = new FileOutputStream(repertoireDonnees + "/" + nomFichierPourClasseDonnees(donnees.getClass()));
+            BufferedWriter buf = new BufferedWriter(new OutputStreamWriter(output));
+            buf.write(gson.toJson(donnees));
+            buf.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -165,20 +170,24 @@ public class EntrepotDeDonnees {
 
         return exists;
     }
-    private static <D extends Donnees> D donneesSurDisque(Class<D> classeDonnees, File repertoireDonnees) throws IOException {
+    private static <D extends Donnees> D donneesSurDisque(Class<D> classeDonnees, File repertoireDonnees) {
         GLog.appel(EntrepotDeDonnees.class);
         D donnees = null;
+        try {
+            File fichier = fichierDonnees(classeDonnees, repertoireDonnees);
+            FileReader readerFichier = new FileReader(fichier);
 
-        File fichier = fichierDonnees(classeDonnees,repertoireDonnees);
-        FileReader readerFichier = new FileReader(fichier);
-
-        donnees = gson.fromJson(readerFichier, classeDonnees);
-
-
-        String chaineJson = gson.toJson(donnees);
+            donnees = gson.fromJson(readerFichier, classeDonnees);
 
 
-        GLog.valeurs("Données chargées du disque: ", classeDonnees, chaineJson);
+           String chaineJson = gson.toJson(donnees);
+
+
+          GLog.valeurs("Données chargées du disque: ", classeDonnees, chaineJson);
+        }catch(FileNotFoundException e){
+
+            e.printStackTrace();
+        }
         return donnees;
     }
 

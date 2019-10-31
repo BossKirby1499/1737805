@@ -7,7 +7,13 @@ import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 import ca.cours5b5.davidlavigueur.R;
+import ca.cours5b5.davidlavigueur.donnees.DGrille;
+import ca.cours5b5.davidlavigueur.donnees.DParametres;
+import ca.cours5b5.davidlavigueur.donnees.DPartie;
+import ca.cours5b5.davidlavigueur.donnees.DPartieLocale;
+import ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees;
 import ca.cours5b5.davidlavigueur.global.GLog;
+import ca.cours5b5.davidlavigueur.vues.pages.PPartie;
 
 public class AAccueil extends ActiviteAvecControles {
 
@@ -56,6 +62,17 @@ public class AAccueil extends ActiviteAvecControles {
     }
 
     public void demarrerPartie(){
+        DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null, this.getFilesDir());
+        if(!dParametres.getABoolean()){
+            DGrille grille = new DGrille();
+            DPartie partie  = new DPartieLocale(); /*a changer plus tard */
+            partie.setGrille(grille);
+
+            EntrepotDeDonnees.entreposerDonnees(partie);
+            EntrepotDeDonnees.sauvegarderSurDisque(partie,this.getFilesDir());
+        }
+
+
 
         Intent intention = new Intent(this, APartieLocale.class);
         this.startActivity(intention);

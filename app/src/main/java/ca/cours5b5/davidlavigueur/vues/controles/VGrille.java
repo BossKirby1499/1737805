@@ -9,11 +9,13 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import ca.cours5b5.davidlavigueur.donnees.DColonne;
+import ca.cours5b5.davidlavigueur.donnees.DPartie;
 import ca.cours5b5.davidlavigueur.global.GLog;
 
 public class VGrille extends LinearLayout {
 
-    ArrayList<VColonne>  tabCol =  new ArrayList<VColonne>();
+    public ArrayList<VColonne>  tabCol =  new ArrayList<VColonne>();
 
     public VGrille(Context context) {
         super(context);
@@ -52,4 +54,31 @@ public class VGrille extends LinearLayout {
 
 
     }
+
+    public void afficherJetons(DPartie donnees) {
+        GLog.appel(this);
+
+        for(int i = 0; i < tabCol.size(); i++){
+
+            VColonne vColonne = tabCol.get(i);
+
+            DColonne dColonne = donnees.getGrille().getColonnes().get(i);
+
+            vColonne.afficherJetons(dColonne.getJetons());
+
+
+        }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
 }

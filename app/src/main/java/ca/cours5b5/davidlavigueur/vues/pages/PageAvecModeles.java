@@ -3,6 +3,8 @@ package ca.cours5b5.davidlavigueur.vues.pages;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import java.io.IOException;
+
 import ca.cours5b5.davidlavigueur.donnees.Donnees;
 import ca.cours5b5.davidlavigueur.modeles.Modele;
 

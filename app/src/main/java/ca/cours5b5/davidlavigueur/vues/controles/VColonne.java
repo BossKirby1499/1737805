@@ -1,6 +1,7 @@
 package ca.cours5b5.davidlavigueur.vues.controles;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -8,13 +9,16 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import ca.cours5b5.davidlavigueur.donnees.DCase;
+import ca.cours5b5.davidlavigueur.enumeration.ECouleur;
 import ca.cours5b5.davidlavigueur.global.GLog;
 
 public class VColonne extends LinearLayout {
 
-    VEntete entete;
-    ArrayList<VCase>  cases =  new ArrayList<VCase>();
+    public VEntete entete;
+    public ArrayList<VCase>  cases =  new ArrayList<VCase>();
 
     public VColonne(Context context) {
         super(context);
@@ -61,5 +65,28 @@ public class VColonne extends LinearLayout {
             this.addView(caseTemp,layoutparamsCase);
         }
 
+    }
+
+    public void afficherJetons(List<DCase> jetons) {
+
+        for(int i = 0; i < jetons.size() ; i++){
+            int caseCouleur = cases.size()-i-1;
+            if(caseCouleur >= 0 ) {
+
+                cases.get(caseCouleur).setBackgroundColor(couleurAfficher(jetons.get(i)));
+            }
+
+        }
+
+
+
+    }
+    public int couleurAfficher(DCase dCase) {
+
+        if(dCase.getColor() == ECouleur.rouge){
+            return Color.RED;
+        }else{
+            return Color.YELLOW;
+        }
     }
 }
