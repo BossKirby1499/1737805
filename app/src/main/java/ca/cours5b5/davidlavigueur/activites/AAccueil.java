@@ -82,4 +82,5 @@ public class AAccueil extends ActiviteAvecControles {
         Intent intention = new Intent(this, AParametres.class);
         this.startActivity(intention);
     }
+
 }
