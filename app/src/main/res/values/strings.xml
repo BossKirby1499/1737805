@@ -7,7 +7,7 @@
     <string name="taille_p">Petit</string>
     <string name="taille_m">Moyen</string>
     <string name="taille_g">Grande</string>
-    <string name="conn">déconnexion</string>
+    <string name="conn">connexion</string>
     <string name="joue">jouer</string>
     <string name="joueLigne">jouer en ligne</string>
     <string name="settings">paramètres</string>
