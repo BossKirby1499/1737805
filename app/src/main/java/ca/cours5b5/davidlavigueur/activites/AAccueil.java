@@ -54,7 +54,7 @@ public class AAccueil extends ActiviteAvecControles {
 
             if(resultCode == RESULT_OK){
                 GLog.valeurs(GUsagerCourant.getId());
-                connexion.setText("deconnexion");
+                connexion.setText(R.string.deco);
                 jouerEnLigne.setEnabled(true);
             }else{
 
@@ -117,7 +117,7 @@ public class AAccueil extends ActiviteAvecControles {
                 if(GUsagerCourant.siConnecte()){
 
                     effectuerDeconnexion();
-                    connexion.setText("connexion");
+                    connexion.setText(R.string.conn);
                 }else{
                     effectuerConnexion();
 

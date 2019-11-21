@@ -2,6 +2,9 @@ package ca.cours5b5.davidlavigueur.donnees;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,22 +24,34 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
 import ca.cours5b5.davidlavigueur.global.GLog;
+import ca.cours5b5.davidlavigueur.global.GUsagerCourant;
 
 public class EntrepotDeDonnees {
 
     static Map< Class<? extends Donnees>, Donnees> classDonneesMap = new HashMap<>();
     private static Gson gson = new GsonBuilder().create();
+    private static FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
 
     public static <D extends Donnees>
-        D obtenirDonnees(Class<D> classeDonnees, Bundle etat,File repertoireDonnees)  {
+        void obtenirDonnees(final Class<D> classeDonnees, final RetourDonnees<D> retourDonnees)  {
 
         GLog.appel(EntrepotDeDonnees.class);
 
-     if(etat != null && siDonneesSontDansEtat(classeDonnees,etat)) {
+     /*if(etat != null && siDonneesSontDansEtat(classeDonnees,etat)) {
 
          return donneesDansEtat(classeDonnees,etat);
 
@@ -55,8 +70,20 @@ public class EntrepotDeDonnees {
              }
          }
 
-     }
+     }*/
+        chargerDonneesDuServeur(classeDonnees, new RetourChargement<D>() {
+            @Override
+            public void chargementReussi(D donnees) {
+                retourDonnees.recevoirDonnees((D) donnees);
+            }
+
+            @Override
+            public void chargementEchoue() {
+                retourDonnees.recevoirDonnees(creerDonnees(classeDonnees));
+            }
+        });
     }
+
     private static<D extends Donnees> D donneesDansEntrepot(Class<? extends Donnees> classeDonnees){
         GLog.appel(EntrepotDeDonnees.class);
        return (D) classDonneesMap.get(classeDonnees);
@@ -190,5 +217,77 @@ public class EntrepotDeDonnees {
         }
         return donnees;
     }
+    private static String nomCollection(Class<? extends Donnees> classeDonnees){
+        GLog.appel(EntrepotDeDonnees.class);
+        return classeDonnees.getSimpleName();
+    }
+    private static String idDocument(){
+        GLog.appel(EntrepotDeDonnees.class);
+      return GUsagerCourant.getId();
+    }
+    private static DocumentReference referenceDocument(Class<? extends Donnees> classesDonnees){
+        GLog.appel(EntrepotDeDonnees.class);
+        DocumentReference documentReference = firestore.collection(nomCollection(classesDonnees)).document(idDocument());
+        return documentReference;
+    }
+    public static <D extends Donnees> void sauvegarderDonneesSurServeur(D donnees){
+        GLog.appel(EntrepotDeDonnees.class);
+        DocumentReference documentReference = referenceDocument(donnees.getClass());
+        documentReference.set(donnees);
+    }
+    private static <D extends Donnees> void reagirDonneesChargees(RetourChargement<D> retourChargement,
+                                                                  @Nullable D donnees){
+        GLog.appel(EntrepotDeDonnees.class);
+        if(donnees != null){
+            retourChargement.chargementReussi(donnees);
+        }else{
+            retourChargement.chargementEchoue();
+        }
+
+    }
+    private static <D extends Donnees> void reagirDocumentCharge(Class<D> classeDonnees,RetourChargement<D> retourChargement,
+                                                                 DocumentSnapshot documentSnapshot){
+        GLog.appel(EntrepotDeDonnees.class);
+        if(documentSnapshot.exists()){
+            D donnees = documentSnapshot.toObject(classeDonnees);
+            reagirDonneesChargees(retourChargement,donnees);
+        }else{
+            retourChargement.chargementEchoue();
+        }
+
+    }
+    private static <D extends Donnees> void installerCapteursServeur(final Class<D> classeDonnees,
+                                                                     final RetourChargement<D> retourChargement,
+                                                                     Task<DocumentSnapshot> promessesServeurs){
+        GLog.appel(EntrepotDeDonnees.class);
+        promessesServeurs.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>(){
+
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot){
+                reagirDocumentCharge(classeDonnees,retourChargement,documentSnapshot);
+            }
+
+
+        });
+        promessesServeurs.addOnFailureListener(new OnFailureListener(){
+
+            @Override
+            public void onFailure(@NonNull Exception e){
+                retourChargement.chargementEchoue();
+            }
+
+        });
+
+
+    }
+    private static <D extends Donnees> void chargerDonneesDuServeur(final Class<D> classeDonnees, final RetourChargement<D> retourChargement){
+        GLog.appel(EntrepotDeDonnees.class);
+        DocumentReference documentReference = referenceDocument(classeDonnees);
+        Task<DocumentSnapshot> promessesServeur = documentReference.get();
+        installerCapteursServeur(classeDonnees,retourChargement,promessesServeur);
+
+
+    }
+
 
 }
