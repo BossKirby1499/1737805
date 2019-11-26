@@ -74,7 +74,7 @@ public class EntrepotDeDonnees {
         chargerDonneesDuServeur(classeDonnees, new RetourChargement<D>() {
             @Override
             public void chargementReussi(D donnees) {
-                retourDonnees.recevoirDonnees((D) donnees);
+                retourDonnees.recevoirDonnees( donnees);
             }
 
             @Override
@@ -84,17 +84,17 @@ public class EntrepotDeDonnees {
         });
     }
 
-    private static<D extends Donnees> D donneesDansEntrepot(Class<? extends Donnees> classeDonnees){
+  /*  private static<D extends Donnees> D donneesDansEntrepot(Class<? extends Donnees> classeDonnees){
         GLog.appel(EntrepotDeDonnees.class);
        return (D) classDonneesMap.get(classeDonnees);
 
-    }
-    private static boolean siDonneesSontDansEntrepot(Class<? extends Donnees> classeDonnees){
+    }*/
+   /* private static boolean siDonneesSontDansEntrepot(Class<? extends Donnees> classeDonnees){
         GLog.appel(EntrepotDeDonnees.class);
         Boolean bool = classDonneesMap.containsKey(classeDonnees);
         return bool;
 
-    }
+    }*/
     private static<D extends Donnees> D creerDonnees(Class<D> classeDonnees){
         GLog.appel(EntrepotDeDonnees.class);
         try {
@@ -107,12 +107,12 @@ public class EntrepotDeDonnees {
 
         }
     }
-    public static<D extends Donnees> void entreposerDonnees(D donnees){
+   /* public static<D extends Donnees> void entreposerDonnees(D donnees){
         GLog.appel(EntrepotDeDonnees.class);
         GLog.valeurs(donnees);
         classDonneesMap.put(donnees.getClass(),donnees);
-    }
-    public static <D extends Donnees> void sauvegarderDonnees(D donnees, Bundle etat){
+    }*/
+    /*public static <D extends Donnees> void sauvegarderDonnees(D donnees, Bundle etat){
         GLog.appel(EntrepotDeDonnees.class);
 
         String stringDonnee = gson.toJson(donnees);
@@ -120,14 +120,14 @@ public class EntrepotDeDonnees {
         etat.putString(clePourClasseDonnees(donnees.getClass()),stringDonnee);
         GLog.valeurs("Données sauvegardées : ", clePourClasseDonnees(donnees.getClass()), stringDonnee);
 
-    }
+    }*/
 
-    private static String clePourClasseDonnees(Class<? extends Donnees>classeDonnee) {
+   /* private static String clePourClasseDonnees(Class<? extends Donnees>classeDonnee) {
         GLog.appel(EntrepotDeDonnees.class);
         String classe = classeDonnee.getSimpleName();
         return classe;
-    }
-    private static boolean siDonneesSontDansEtat(Class<? extends Donnees>classeDonnees,Bundle etat){
+    }*/
+    /*private static boolean siDonneesSontDansEtat(Class<? extends Donnees>classeDonnees,Bundle etat){
 
 
       if( etat.getString(clePourClasseDonnees(classeDonnees)) == null){
@@ -138,8 +138,8 @@ public class EntrepotDeDonnees {
           return true;
       }
 
-    }
-    private static <D extends Donnees> D donneesDansEtat(Class<D> classeDonnees, Bundle etat){
+    }*/
+   /* private static <D extends Donnees> D donneesDansEtat(Class<D> classeDonnees, Bundle etat){
         GLog.appel(EntrepotDeDonnees.class);
 
 
@@ -152,9 +152,9 @@ public class EntrepotDeDonnees {
         GLog.valeurs("Données chargées : ", classeDonnees, donneesJson);
         return donnees;
 
-    }
+    }*/
 
-    public static <D extends Donnees> void sauvegarderSurDisque(D donnees, File repertoireDonnees)  {
+   /* public static <D extends Donnees> void sauvegarderSurDisque(D donnees, File repertoireDonnees)  {
         GLog.appel(EntrepotDeDonnees.class);
         try {
             FileOutputStream output = new FileOutputStream(repertoireDonnees + "/" + nomFichierPourClasseDonnees(donnees.getClass()));
@@ -165,21 +165,21 @@ public class EntrepotDeDonnees {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
-    private static String nomFichierPourClasseDonnees(Class<? extends Donnees> classeDonnees){
+  /*  private static String nomFichierPourClasseDonnees(Class<? extends Donnees> classeDonnees){
         GLog.appel(EntrepotDeDonnees.class);
         String nomFichier = classeDonnees+".json";
         return nomFichier;
-    }
+    }*/
 
-    private static File fichierDonnees(Class<? extends Donnees> classeDonnees, File repertoireDonnees){
+   /* private static File fichierDonnees(Class<? extends Donnees> classeDonnees, File repertoireDonnees){
         GLog.appel(EntrepotDeDonnees.class);
         File fichier = new File(repertoireDonnees+"/"+nomFichierPourClasseDonnees(classeDonnees));
         return fichier;
 
-    }
-    private static boolean siDonneesSontSurDisque(Class<? extends Donnees> classeDonnees, File repertoireDonnees){
+    }*/
+    /*private static boolean siDonneesSontSurDisque(Class<? extends Donnees> classeDonnees, File repertoireDonnees){
         GLog.appel(EntrepotDeDonnees.class);
         File temp;
         boolean exists = false;
@@ -196,8 +196,8 @@ public class EntrepotDeDonnees {
         }
 
         return exists;
-    }
-    private static <D extends Donnees> D donneesSurDisque(Class<D> classeDonnees, File repertoireDonnees) {
+    }*/
+   /* private static <D extends Donnees> D donneesSurDisque(Class<D> classeDonnees, File repertoireDonnees) {
         GLog.appel(EntrepotDeDonnees.class);
         D donnees = null;
         try {
@@ -216,7 +216,7 @@ public class EntrepotDeDonnees {
             e.printStackTrace();
         }
         return donnees;
-    }
+    }*/
     private static String nomCollection(Class<? extends Donnees> classeDonnees){
         GLog.appel(EntrepotDeDonnees.class);
         return classeDonnees.getSimpleName();

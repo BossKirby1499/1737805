@@ -18,8 +18,12 @@ import java.nio.file.StandardOpenOption;
 
 import ca.cours5b5.davidlavigueur.donnees.Donnees;
 import ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees;
+import ca.cours5b5.davidlavigueur.donnees.RetourDonnees;
 import ca.cours5b5.davidlavigueur.modeles.Modele;
 import ca.cours5b5.davidlavigueur.vues.pages.PageAvecModeles;
+
+import static ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees.obtenirDonnees;
+import static ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees.sauvegarderDonneesSurServeur;
 
 public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
         P extends PageAvecModeles> extends Activite {
@@ -34,29 +38,11 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        initialiserDonneesPageModele(savedInstanceState);
-    }
-
-
-    private void initialiserDonneesPageModele(Bundle etat) {
-
-        donnees = recupererDonnees(etat);
-
-        initialiserPageModele(donnees);
-
-
-    }
-
-    private void initialiserPageModele(D donnees) {
         page = recupererPage();
-
-            page.creerAffichage(donnees);
-
-
-
-        modele = creerModele( donnees, page);
-
+        obtenirDonneesPuisInitialiserModelePage();
     }
+
+
 
     private P recupererPage() {
 
@@ -68,15 +54,51 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
     @Override
     protected void onPause() {
         super.onPause();
+        sauvegarderDonneesSurServeur(donnees);
+
+
+    }
+    /*private File repertoireDonnees(){
+        File repertoireDonnees = this.getFilesDir();
+        return repertoireDonnees;
+    }*/
+    private void creerAffichage(){
+        page.creerAffichage(donnees);
+    }
+    private void rafraichirAffichage(){
         page.rafraichirAffichage(donnees);
+    }
+    private void initialiserPage(){
 
+        creerAffichage();
+        rafraichirAffichage();
 
-        EntrepotDeDonnees.sauvegarderSurDisque(donnees,repertoireDonnees());
+    }
+    private void memoriserDonneesPuisInitialiserModelePage(D donneesObtenues){
+        donnees = donneesObtenues;
+        initialiserPage();
+        modele = creerModele(donnees,page);
+
+    }
+    private void obtenirDonneesPuisInitialiserModelePage(){
+
+        RetourDonnees retourDonnees = new RetourDonnees() {
+            @Override
+            public void recevoirDonnees(Donnees donnees) {
+
+                memoriserDonneesPuisInitialiserModelePage((D) donnees);
+            }
+        };
+        obtenirDonnees(getClassDonnees(), retourDonnees);
 
 
     }
 
-    private D recupererDonnees(Bundle etat) {
+    protected abstract int getIdPage();
+    protected abstract Class<D> getClassDonnees();
+    protected abstract M creerModele(D donnees, P page);
+
+    /*private D recupererDonnees(Bundle etat) {
 
         Class <D> classeDonnees = getClassDonnees();
 
@@ -84,24 +106,34 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
 
         return donnees;
-    }
+    }*/
 
-    @Override
+   /* @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
 
         EntrepotDeDonnees.sauvegarderDonnees(donnees, outState);
 
-    }
+    }*/
+        /*private void initialiserPageModele(D donnees) {
+        page = recupererPage();
 
-    private File repertoireDonnees(){
-        File repertoireDonnees = this.getFilesDir();
-        return repertoireDonnees;
-    }
+            page.creerAffichage(donnees);
 
 
-    protected abstract int getIdPage();
-    protected abstract Class<D> getClassDonnees();
-    protected abstract M creerModele(D donnees, P page);
+
+        modele = creerModele( donnees, page);
+
+    }*/
+        /*private void initialiserDonneesPageModele(Bundle etat) {
+
+        donnees = recupererDonnees(etat);
+
+        initialiserPageModele(donnees);
+
+
+    }*/
+
+
 
 }

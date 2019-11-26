@@ -130,15 +130,15 @@ public class AAccueil extends ActiviteAvecControles {
     }
 
     public void demarrerPartie(){
-        DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null, this.getFilesDir());
-        if(!dParametres.getABoolean()){
+       //DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null, this.getFilesDir());
+          //if(!dParametres.getABoolean()){
             DGrille grille = new DGrille();
             DPartie partie  = new DPartieLocale(); /*a changer plus tard */
             partie.setGrille(grille);
 
-            EntrepotDeDonnees.entreposerDonnees(partie);
+           /* EntrepotDeDonnees.entreposerDonnees(partie);
             EntrepotDeDonnees.sauvegarderSurDisque(partie,this.getFilesDir());
-        }
+        }*/
 
 
 

@@ -45,8 +45,8 @@ public abstract class PPartie extends PageAvecModeles<DPartie, MPartie> {
         GLog.appel(this);
 
 
-       DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null,this.getContext().getFilesDir());
-       donnees.setTailleGrille(dParametres.getTailleGrille());
+       /*DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null,this.getContext().getFilesDir());*/
+       donnees.setTailleGrille(ETailleGrille.moyenne);
        grille.creerGrille(ETailleGrille.getHauteur(donnees.getTailleGrille()),ETailleGrille.getLargeur(donnees.getTailleGrille()));
 
       for(int i = 0; i <= ETailleGrille.getLargeur(donnees.getTailleGrille()); i++){
