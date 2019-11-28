@@ -5,7 +5,7 @@ import ca.cours5b5.davidlavigueur.vues.pages.PageAvecModeles;
 
 public abstract class Modele <D extends Donnees,P extends PageAvecModeles> {
 
-    protected D donnees;
+    public D donnees;
     protected P page;
 
     public Modele(D donnees, P page){
@@ -13,8 +13,10 @@ public abstract class Modele <D extends Donnees,P extends PageAvecModeles> {
         this.donnees = donnees;
         this.page = page;
         page.installerCapteurs(this);
+        initialiserCommandes();
 
     }
+    protected abstract void initialiserCommandes();
 
 
 }

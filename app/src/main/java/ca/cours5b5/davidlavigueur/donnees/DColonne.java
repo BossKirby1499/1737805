@@ -5,7 +5,8 @@ import java.util.List;
 
 public class DColonne extends Donnees {
 
-    List<DCase> jetons = new ArrayList<>();
+
+   public  List<DCase> jetons = new ArrayList<>();
 
     public DColonne(){
 
