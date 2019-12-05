@@ -130,6 +130,7 @@ public class AAccueil extends ActiviteAvecControles {
     }
 
     public void demarrerPartie(){
+        GLog.appel(this);
        //DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null, this.getFilesDir());
           //if(!dParametres.getABoolean()){
             DGrille grille = new DGrille();
@@ -146,7 +147,7 @@ public class AAccueil extends ActiviteAvecControles {
         this.startActivity(intention);
     }
     public void pageParametres(){
-
+        GLog.appel(this);
         Intent intention = new Intent(this, AParametres.class);
         this.startActivity(intention);
     }

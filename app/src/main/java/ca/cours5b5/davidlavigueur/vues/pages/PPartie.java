@@ -5,8 +5,11 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.cours5b5.davidlavigueur.R;
+import ca.cours5b5.davidlavigueur.commandes.CCoupIci;
 import ca.cours5b5.davidlavigueur.donnees.DColonne;
 import ca.cours5b5.davidlavigueur.donnees.DGrille;
 import ca.cours5b5.davidlavigueur.donnees.DParametres;
@@ -21,6 +24,7 @@ import ca.cours5b5.davidlavigueur.vues.controles.VGrille;
 public abstract class PPartie extends PageAvecModeles<DPartie, MPartie> {
 
     VGrille grille;
+    List<CCoupIci> listeCoup = new ArrayList<>();
     public PPartie(Context context) {
         super(context);
     }
@@ -56,12 +60,14 @@ public abstract class PPartie extends PageAvecModeles<DPartie, MPartie> {
 
 
        }
-      rafraichirAffichage(donnees);
+
     }
-    public void installerCapteurs(final MPartie modele){
+
+
+    public void installerCapteurs(){
         GLog.appel(this);
 
-        for( int i = 0; i < grille.tabCol.size();i++){
+        for(int i = 0; i < grille.tabCol.size();i++){
 
            VColonne col =  grille.tabCol.get(i);
 
@@ -72,7 +78,7 @@ public abstract class PPartie extends PageAvecModeles<DPartie, MPartie> {
                 public void onClick(View view) {
 
                     GLog.appel(this);
-                    modele.jouerIci(idCol);
+                    listeCoup.get(idCol).executer();
 
                 }
 
@@ -81,8 +87,36 @@ public abstract class PPartie extends PageAvecModeles<DPartie, MPartie> {
 
     }
     public void rafraichirAffichage(DPartie donnees){
+        GLog.appel(this);
         grille.afficherJetons(donnees);
+        rafraichirCommandes();
+    }
+    public void creerCommandes(){
+        GLog.appel(this);
+
+        for( int i = 0; i < grille.tabCol.size();i++){
+            final int idCol = i;
+            CCoupIci cCoupTemp = new CCoupIci(idCol);
+                listeCoup.add(cCoupTemp);
+        }
+
 
     }
 
+    @Override
+    public void rafraichirCommandes() {
+        GLog.appel(this);
+        for(int i = 0 ; i < grille.tabCol.size();i++){
+            GLog.appel(this);
+
+
+                VColonne col =  grille.tabCol.get(i);
+
+                final int idCol = i;
+                col.entete.setClickable(listeCoup.get(idCol).siExecutable());
+
+
+        }
+
+    }
 }

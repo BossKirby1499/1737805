@@ -8,6 +8,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import ca.cours5b5.davidlavigueur.R;
+import ca.cours5b5.davidlavigueur.commandes.CContinuerPartie;
+import ca.cours5b5.davidlavigueur.commandes.CTailleGrille;
 import ca.cours5b5.davidlavigueur.donnees.DParametres;
 import ca.cours5b5.davidlavigueur.enumeration.ETailleGrille;
 import ca.cours5b5.davidlavigueur.global.GLog;
@@ -21,6 +23,12 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
     CheckBox check2;
     CheckBox check3;
     Switch  switch1;
+    CTailleGrille cTailleGrillePetite;
+    CTailleGrille cTailleGrilleMoyenne;
+    CTailleGrille cTailleGrilleGrande;
+    CContinuerPartie cContinuerPartieOui;
+    CContinuerPartie cContinuerPartieNon;
+
 
     public PParametres(Context context) {
         super(context);
@@ -36,7 +44,7 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
 
     @Override
     public void creerAffichage(DParametres donnees) {
-
+        GLog.appel(this);
         if(donnees.getTailleGrille() == ETailleGrille.petite){
             check1.setChecked(true);
             check2.setChecked(false);
@@ -55,50 +63,62 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
     }
 
     @Override
-    public void installerCapteurs( final MParametres modele) {
+    public void installerCapteurs(MParametres modele) {
 
+    }
+
+    @Override
+    public void installerCapteurs() {
+        GLog.appel(this);
         switch1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(continuerPartie()){
+                    cContinuerPartieOui.executer();
+                }else{
+                    cContinuerPartieNon.executer();
+                }
 
-                modele.changerContinuer(switch1.isChecked());
             }
         });
         check1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                modele.changerTailleGrille(ETailleGrille.petite);
-                if(check1.isChecked()) {
+                cTailleGrillePetite.executer();
+             /*   if(check1.isChecked()) {
                     check2.setChecked(false);
                     check3.setChecked(false);
-                }
+                }*/
             }
         });
         check2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                modele.changerTailleGrille(ETailleGrille.moyenne);
-                if(check2.isChecked()) {
+                cTailleGrilleMoyenne.executer();
+              /*  if(check2.isChecked()) {
                     check1.setChecked(false);
                     check3.setChecked(false);
-                }
+                }*/
             }
         });
         check3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                modele.changerTailleGrille(ETailleGrille.grande);
-                if(check3.isChecked()) {
+                cTailleGrilleGrande.executer();
+               /* if(check3.isChecked()) {
                     check1.setChecked(false);
                     check2.setChecked(false);
-                }
+                }*/
             }
         });
 
     }
 
+
     @Override
     public void rafraichirAffichage(DParametres donnees) {
+        GLog.appel(this);
+        rafraichirCommandes();
         if(donnees.getTailleGrille() == ETailleGrille.petite){
             check1.setChecked(true);
             check2.setChecked(false);
@@ -112,6 +132,29 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
             check2.setChecked(false);
             check3.setChecked(true);
         }
+
+    }
+
+    @Override
+    public void creerCommandes() {
+        GLog.appel(this);
+         cContinuerPartieOui = new CContinuerPartie(true);
+        cContinuerPartieNon = new CContinuerPartie(false);
+
+         cTailleGrillePetite = new CTailleGrille(ETailleGrille.petite);
+         cTailleGrilleMoyenne = new CTailleGrille(ETailleGrille.moyenne);
+         cTailleGrilleGrande  = new CTailleGrille(ETailleGrille.grande);
+    }
+
+
+
+    @Override
+    public void rafraichirCommandes() {
+        GLog.appel(this);
+        check1.setClickable(cTailleGrillePetite.siExecutable());
+        check2.setClickable(cTailleGrilleMoyenne.siExecutable());
+        check3.setClickable(cTailleGrilleGrande.siExecutable());
+
     }
 
     @Override
@@ -125,5 +168,9 @@ public class PParametres extends PageAvecModeles<DParametres, MParametres> {
         GLog.valeurs(texte,check1,check2, check3, switch1);
     }
 
+    private boolean continuerPartie(){
+        GLog.appel(this);
+        return switch1.isChecked();
+    }
 
 }

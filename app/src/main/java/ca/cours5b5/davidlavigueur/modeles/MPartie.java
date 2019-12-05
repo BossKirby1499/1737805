@@ -13,6 +13,7 @@ import ca.cours5b5.davidlavigueur.donnees.DGrille;
 import ca.cours5b5.davidlavigueur.donnees.DPartie;
 import ca.cours5b5.davidlavigueur.enumeration.ECouleur;
 import ca.cours5b5.davidlavigueur.enumeration.ETailleGrille;
+import ca.cours5b5.davidlavigueur.global.GLog;
 import ca.cours5b5.davidlavigueur.vues.controles.VCase;
 import ca.cours5b5.davidlavigueur.vues.controles.VColonne;
 import ca.cours5b5.davidlavigueur.vues.pages.PPartie;
@@ -44,6 +45,7 @@ public class MPartie extends Modele<DPartie, PPartie> {
 
 
     public void jouerIci(int colonne){
+        GLog.appel(this);
         DCase cases = new DCase();
         if(donnees.getColorSuivant() == ECouleur.rouge) {
 
@@ -64,10 +66,10 @@ public class MPartie extends Modele<DPartie, PPartie> {
 
     }
     public boolean siJouerPossible(int colonne){
-
+        GLog.appel(this);
        List<DColonne> colonnes = donnees.getGrille().getColonnes();
         DColonne col = colonnes.get(colonne);
-        if(col.jetons.size() == ETailleGrille.getHauteur(donnees.getTailleGrille())){
+        if(col.jetons.size() > ETailleGrille.getHauteur(donnees.getTailleGrille())){
             return false;
         }else{
             return true;

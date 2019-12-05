@@ -19,5 +19,10 @@ public class PPartieLocale extends PPartie{
         super(context, attrs, defStyleAttr);
     }
 
+    @Override
+    public void installerCapteurs(MPartie modele) {
+
+    }
+
 
 }

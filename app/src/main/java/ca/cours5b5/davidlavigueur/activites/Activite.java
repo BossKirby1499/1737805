@@ -16,10 +16,10 @@ public abstract class Activite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         GLog.appel(this);
         GLog.valeurs(savedInstanceState);
-
         int contentViewId = getLayoutId();
-
+        GLog.valeurs(contentViewId);
         super.setContentView(contentViewId);
+
 
     }
     @Override

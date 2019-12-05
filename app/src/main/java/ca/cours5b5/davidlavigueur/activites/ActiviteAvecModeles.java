@@ -19,6 +19,7 @@ import java.nio.file.StandardOpenOption;
 import ca.cours5b5.davidlavigueur.donnees.Donnees;
 import ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees;
 import ca.cours5b5.davidlavigueur.donnees.RetourDonnees;
+import ca.cours5b5.davidlavigueur.global.GLog;
 import ca.cours5b5.davidlavigueur.modeles.Modele;
 import ca.cours5b5.davidlavigueur.vues.pages.PageAvecModeles;
 
@@ -29,14 +30,14 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
         P extends PageAvecModeles> extends Activite {
 
 
-    private D donnees;
-    private P page;
+    protected D donnees;
+    protected P page;
     private M modele;
     private Bundle etat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        GLog.appel(this);
         super.onCreate(savedInstanceState);
         page = recupererPage();
         obtenirDonneesPuisInitialiserModelePage();
@@ -45,7 +46,7 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
 
     private P recupererPage() {
-
+        GLog.appel(this);
         int id = getIdPage();
         return findViewById(id);
 
@@ -53,6 +54,7 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
     @Override
     protected void onPause() {
+        GLog.appel(this);
         super.onPause();
         sauvegarderDonneesSurServeur(donnees);
 
@@ -63,25 +65,32 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
         return repertoireDonnees;
     }*/
     private void creerAffichage(){
+        GLog.appel(this);
         page.creerAffichage(donnees);
+        page.creerCommandes();
+        page.installerCapteurs();
     }
     private void rafraichirAffichage(){
+        GLog.appel(this);
         page.rafraichirAffichage(donnees);
+        page.rafraichirCommandes();
     }
     private void initialiserPage(){
-
+        GLog.appel(this);
         creerAffichage();
         rafraichirAffichage();
 
     }
     private void memoriserDonneesPuisInitialiserModelePage(D donneesObtenues){
+        GLog.appel(this);
         donnees = donneesObtenues;
+        modele = creerModele();
         initialiserPage();
-        modele = creerModele(donnees,page);
+
 
     }
     private void obtenirDonneesPuisInitialiserModelePage(){
-
+        GLog.appel(this);
         RetourDonnees retourDonnees = new RetourDonnees() {
             @Override
             public void recevoirDonnees(Donnees donnees) {
@@ -96,7 +105,7 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
     protected abstract int getIdPage();
     protected abstract Class<D> getClassDonnees();
-    protected abstract M creerModele(D donnees, P page);
+    protected abstract M creerModele();
 
     /*private D recupererDonnees(Bundle etat) {
 

@@ -19,17 +19,20 @@ public class AParametres extends ActiviteAvecModeles<DParametres, MParametres, P
 
     @Override
     protected int getIdPage() {
+        GLog.appel(this);
         return R.id.param;
     }
 
     @Override
     protected Class<DParametres> getClassDonnees() {
+        GLog.appel(this);
         Class classeDParametres = DParametres.class;
        return classeDParametres;
     }
 
     @Override
-    protected MParametres creerModele(DParametres donnees, PParametres page) {
+    protected MParametres creerModele() {
+        GLog.appel(this);
             MParametres modele =  new MParametres(donnees,page);
             return modele;
 

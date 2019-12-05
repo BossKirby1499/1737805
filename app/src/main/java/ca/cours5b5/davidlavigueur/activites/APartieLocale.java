@@ -24,7 +24,7 @@ public class APartieLocale extends  ActiviteAvecModeles<DPartieLocale, MPartieLo
         return classDPartieLocale;
     }
     @Override
-    protected MPartieLocale creerModele(DPartieLocale donnees, PPartieLocale page) {
+    protected MPartieLocale creerModele() {
         MPartieLocale modele =  new MPartieLocale(donnees,page);
         return modele;
 

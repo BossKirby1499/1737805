@@ -1,5 +1,6 @@
 package ca.cours5b5.davidlavigueur.commandes;
 
+import ca.cours5b5.davidlavigueur.global.GLog;
 import ca.cours5b5.davidlavigueur.modeles.MPartie;
 
 public class CCoupIci extends Commande{
@@ -12,7 +13,7 @@ public class CCoupIci extends Commande{
         modeleCommande = modele;
 
     }
-    private static  int colonne;
+    private   int colonne;
 
     public CCoupIci(int colonneJeu){
 
@@ -22,10 +23,11 @@ public class CCoupIci extends Commande{
 
     @Override
     public void executer() {
+        GLog.appel(this);
         modeleCommande.jouerIci(colonne);
     }
     public boolean siExecutable(){
-
+        GLog.appel(this);
         return modeleCommande.siJouerPossible(colonne);
 
     }
