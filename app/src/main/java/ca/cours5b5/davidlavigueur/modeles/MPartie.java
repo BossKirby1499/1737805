@@ -4,9 +4,14 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import ca.cours5b5.davidlavigueur.activites.APartieLocale;
+import ca.cours5b5.davidlavigueur.activites.ActiviteAvecModeles;
 import ca.cours5b5.davidlavigueur.commandes.CContinuerPartie;
 import ca.cours5b5.davidlavigueur.commandes.CCoupIci;
+import ca.cours5b5.davidlavigueur.commandes.CMessagePuisCommande;
+import ca.cours5b5.davidlavigueur.commandes.CQuitterActivite;
 import ca.cours5b5.davidlavigueur.donnees.DCase;
 import ca.cours5b5.davidlavigueur.donnees.DColonne;
 import ca.cours5b5.davidlavigueur.donnees.DGrille;
@@ -28,6 +33,9 @@ public class MPartie extends Modele<DPartie, PPartie> {
     @Override
     protected void initialiserCommandes() {
         CCoupIci.initialiser(MPartie.this);
+
+
+
     }
 
     public void setColorSuivant(ECouleur color){
@@ -47,6 +55,7 @@ public class MPartie extends Modele<DPartie, PPartie> {
     public void jouerIci(int colonne){
         GLog.appel(this);
         DCase cases = new DCase();
+
         if(donnees.getColorSuivant() == ECouleur.rouge) {
 
             cases.setColor(ECouleur.rouge);
@@ -62,6 +71,7 @@ public class MPartie extends Modele<DPartie, PPartie> {
 
         donnees.getGrille().getColonnes().get(colonne).ajouterJeton(cases);
         page.rafraichirAffichage(donnees);
+        testerSiPartieGagnee();
 
 
     }
@@ -75,6 +85,41 @@ public class MPartie extends Modele<DPartie, PPartie> {
             return true;
         }
 
+    }
+    private void reagirPartieGagnee(){
+        CMessagePuisCommande.initialiser((APartieLocale) page.getContext());
+        CMessagePuisCommande commandeMessage = new CMessagePuisCommande("Les "+getIdMessageAuGagnant()+" gagnent");
+        commandeMessage.executer();
+
+
+    }
+    private void testerSiPartieGagnee(){
+        if(siPartieGagnee()){
+            reagirPartieGagnee();
+        }
+    }
+    private boolean siPartieGagnee(){
+        final int random = new Random().nextInt(2);
+        GLog.valeurs(random);
+        if(random == 1){
+            GLog.valeurs("T'a gagné");
+            return true;
+        }else{
+            GLog.valeurs("T'a perdu");
+            return false;
+        }
+    }
+    private String getIdMessageAuGagnant(){
+        String couleurNom;
+        ECouleur color = donnees.getColorSuivant();
+        if(color == ECouleur.rouge){
+            couleurNom = "jaune";
+
+        }else{
+            couleurNom = "rouge";
+
+        }
+        return couleurNom;
     }
 
 

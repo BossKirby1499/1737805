@@ -20,4 +20,5 @@ public abstract class ActiviteAvecControles extends Activite {
     }
     protected abstract void recupererControles();
 
+
 }

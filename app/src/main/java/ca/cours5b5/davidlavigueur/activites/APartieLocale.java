@@ -29,4 +29,5 @@ public class APartieLocale extends  ActiviteAvecModeles<DPartieLocale, MPartieLo
         return modele;
 
     }
+
 }

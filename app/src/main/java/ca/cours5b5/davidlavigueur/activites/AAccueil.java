@@ -91,6 +91,37 @@ public class AAccueil extends ActiviteAvecControles {
 
         GLog.valeurs(connexion, jouer, jouerEnLigne, parametres);
 
+        setBouton();
+        siConnecte();
+
+
+    }
+
+    public void demarrerPartie(){
+        GLog.appel(this);
+       //DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null, this.getFilesDir());
+          //if(!dParametres.getABoolean()){
+            DGrille grille = new DGrille();
+            DPartie partie  = new DPartieLocale(); /*a changer plus tard */
+            partie.setGrille(grille);
+
+           /* EntrepotDeDonnees.entreposerDonnees(partie);
+            EntrepotDeDonnees.sauvegarderSurDisque(partie,this.getFilesDir());
+        }*/
+
+
+
+        Intent intention = new Intent(this, APartieLocale.class);
+        this.startActivity(intention);
+    }
+    public void pageParametres(){
+        GLog.appel(this);
+        Intent intention = new Intent(this, AParametres.class);
+        this.startActivity(intention);
+    }
+
+    public void setBouton(){
+
         jouer.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -126,30 +157,14 @@ public class AAccueil extends ActiviteAvecControles {
             }
         });
 
-
     }
+    public void siConnecte(){
 
-    public void demarrerPartie(){
-        GLog.appel(this);
-       //DParametres dParametres = EntrepotDeDonnees.obtenirDonnees(DParametres.class,null, this.getFilesDir());
-          //if(!dParametres.getABoolean()){
-            DGrille grille = new DGrille();
-            DPartie partie  = new DPartieLocale(); /*a changer plus tard */
-            partie.setGrille(grille);
+        if(GUsagerCourant.siConnecte()){
+            connexion.setText(R.string.deco);
+            jouerEnLigne.setEnabled(true);
+        }
 
-           /* EntrepotDeDonnees.entreposerDonnees(partie);
-            EntrepotDeDonnees.sauvegarderSurDisque(partie,this.getFilesDir());
-        }*/
-
-
-
-        Intent intention = new Intent(this, APartieLocale.class);
-        this.startActivity(intention);
-    }
-    public void pageParametres(){
-        GLog.appel(this);
-        Intent intention = new Intent(this, AParametres.class);
-        this.startActivity(intention);
     }
 
 }

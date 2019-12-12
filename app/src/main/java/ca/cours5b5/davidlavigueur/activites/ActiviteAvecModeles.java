@@ -1,6 +1,9 @@
 package ca.cours5b5.davidlavigueur.activites;
 
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -23,6 +26,7 @@ import ca.cours5b5.davidlavigueur.global.GLog;
 import ca.cours5b5.davidlavigueur.modeles.Modele;
 import ca.cours5b5.davidlavigueur.vues.pages.PageAvecModeles;
 
+
 import static ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees.obtenirDonnees;
 import static ca.cours5b5.davidlavigueur.donnees.EntrepotDeDonnees.sauvegarderDonneesSurServeur;
 
@@ -31,7 +35,7 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
 
 
     protected D donnees;
-    protected P page;
+    public P page;
     private M modele;
     private Bundle etat;
 
@@ -101,6 +105,10 @@ public abstract class ActiviteAvecModeles<D extends Donnees,M extends Modele,
         obtenirDonnees(getClassDonnees(), retourDonnees);
 
 
+    }
+
+    public void quitterActivite(){
+        finish();
     }
 
     protected abstract int getIdPage();

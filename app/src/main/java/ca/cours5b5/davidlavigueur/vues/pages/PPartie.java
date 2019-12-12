@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,4 +121,6 @@ public abstract class PPartie extends PageAvecModeles<DPartie, MPartie> {
         }
 
     }
+
+
 }
